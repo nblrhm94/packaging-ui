@@ -2,7 +2,11 @@ import React, { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
 import { Product, PackageResult } from './types';
 
-const API_BASE_URL = 'http://localhost:8080/api';
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
+if (!API_BASE_URL) {
+  throw new Error("REACT_APP_API_BASE_URL is not defined. Please check your .env files.");
+}
 
 function App() {
   const [products, setProducts] = useState<Product[]>([]);
